@@ -1,0 +1,152 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyM4dDig8XJS9O5be+XcO4Zv",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Miikezin/Ua_a1/blob/main/rascunho%20de%20sistema%20de%20loja\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "E0svgFvqf1S5"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "##uso de funções"
+      ],
+      "metadata": {
+        "id": "Fhv5jWlHf4Hf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def calcular_desconto(valor, percentual):\n",
+        "    \"\"\"Calcula o valor final aplicando um valor percentual.\"\"\"\n",
+        "    if percentual < 0 or percentual > 100:\n",
+        "        return None # marcação inválida\n",
+        "    desconto = valor * (percentual / 100)\n",
+        "    return valor - desconto\n",
+        "\n",
+        "def registrar_venda(produto, valor_final):\n",
+        "    \"\"\"Imprime o registro de uma venda\"\"\"\n",
+        "    print(f\"produto: {produto}\")\n",
+        "    print(f\"valor final: {valor_final:.2f}\")\n",
+        "\n",
+        "\n",
+        "# funçao lambda para arredondar\n",
+        "\n",
+        "arredondar = lambda v: round(v, 2)"
+      ],
+      "metadata": {
+        "id": "lyHbOnuKf_CW"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#variaveis principais do tdv\n",
+        "total_vendas = 0\n",
+        "quantidade_vendas = 0\n"
+      ],
+      "metadata": {
+        "id": "_51pwZJejqzK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#loop principal do caixa.minha loja pdv\n",
+        "while True:\n",
+        "  print(\"\\n---1 - minha loja - pdv---\")\n",
+        "  print(\"2 - registrar venda\")\n",
+        "  print(\"3 - ver relatório do dia\")\n",
+        "  print(\"4 - encerrar caixa\")\n",
+        "\n",
+        "  opcao = input(\"Digite a opção desejada: \")\n",
+        "\n",
+        "  if opcao == '4': # Corresponds to \"4 - encerrar caixa\"\n",
+        "    print(\"Encerrando caixa.\")\n",
+        "    break\n",
+        "  elif opcao == \"2\": # Corresponds to \"2 - registrar venda\"\n",
+        "    produto = input(\"digite o nome do produto: \")\n",
+        "    valor = float(input(\"digite o valor do produto: \"))\n",
+        "    percentual = float(input(\"digite o percentual de desconto: \"))\n",
+        "\n",
+        "    valor_final = calcular_desconto(valor, percentual)\n",
+        "    if valor_final is None:\n",
+        "      print(\"valor invalido (percentual deve estar entre 0 e 100).\")\n",
+        "    else:\n",
+        "      valor_final = arredondar(valor_final)\n",
+        "      registrar_venda(produto, valor_final)\n",
+        "      total_vendas += valor_final\n",
+        "      quantidade_vendas += 1\n",
+        "  elif opcao == \"3\": # Corresponds to \"3 - ver relatório do dia\"\n",
+        "    print(f\"\\nvendas hoje: {quantidade_vendas}\")\n",
+        "    print(f\"total faturado: R$ {arredondar(total_vendas):.2f}\")\n",
+        "  else:\n",
+        "    print(\"Opção inválida, tente novamente.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "SifDS4ONj5_g",
+        "outputId": "0ff6211d-2c11-48d7-ba2e-88231350bd2c"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "---1 - minha loja - pdv---\n",
+            "2 - registrar venda\n",
+            "3 - ver relatório do dia\n",
+            "4 - encerrar caixa\n",
+            "Digite a opção desejada: 4\n",
+            "Encerrando caixa.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "16QoZ34ZhdjL"
+      }
+    }
+  ]
+}
