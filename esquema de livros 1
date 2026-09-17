@@ -1,0 +1,181 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMNVWAgfhieGU4QcIln2ubS",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Miikezin/Ua_a1/blob/main/esquema%20de%20livros%201\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Ae7UKcmmlzvj",
+        "outputId": "b6a72942-1b9f-46b3-8807-db447f090dcc"
+      },
+      "outputs": [
+        {
+          "metadata": {
+            "tags": null
+          },
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "\n",
+            "===== BIBLIOTECA =====\n",
+            "1 - Cadastrar livro\n",
+            "2 - Listar livros\n",
+            "3 - Buscar livro\n",
+            "4 - Gerar gráfico\n",
+            "5 - Sair\n"
+          ]
+        }
+      ],
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "\n",
+        "class Livro:\n",
+        "    def __init__(self, titulo, autor, genero, quantidade_disponivel):\n",
+        "        self.titulo = titulo\n",
+        "        self.autor = autor\n",
+        "        self.genero = genero\n",
+        "        self.quantidade_disponivel = quantidade_disponivel\n",
+        "\n",
+        "    def __str__(self):\n",
+        "        return (\n",
+        "            f\"Título: {self.titulo} | \"\n",
+        "            f\"Autor: {self.autor} | \"\n",
+        "            f\"Gênero: {self.genero} | \"\n",
+        "            f\"Quantidade disponível: {self.quantidade_disponivel}\"\n",
+        "        )\n",
+        "\n",
+        "\n",
+        "def cadastrar_livro(livros):\n",
+        "    titulo = input(\"Digite o título: \")\n",
+        "    autor = input(\"Digite o autor: \")\n",
+        "    genero = input(\"Digite o gênero: \")\n",
+        "    quantidade = int(input(\"Digite a quantidade disponível: \"))\n",
+        "\n",
+        "    novo_livro = Livro(\n",
+        "        titulo,\n",
+        "        autor,\n",
+        "        genero,\n",
+        "        quantidade\n",
+        "    )\n",
+        "\n",
+        "    livros.append(novo_livro)\n",
+        "\n",
+        "    print(\"Livro cadastrado com sucesso!\")\n",
+        "\n",
+        "\n",
+        "def listar_livros(livros):\n",
+        "    if len(livros) == 0:\n",
+        "        print(\"Nenhum livro cadastrado.\")\n",
+        "        return\n",
+        "\n",
+        "    print(\"\\n--- LIVROS CADASTRADOS ---\")\n",
+        "\n",
+        "    for livro in livros:\n",
+        "        print(livro)\n",
+        "\n",
+        "\n",
+        "def buscar_livro(livros):\n",
+        "    titulo_busca = input(\"Digite o título que deseja buscar: \")\n",
+        "\n",
+        "    encontrado = False\n",
+        "\n",
+        "    for livro in livros:\n",
+        "        if livro.titulo.lower() == titulo_busca.lower():\n",
+        "            print(\"\\nLivro encontrado:\")\n",
+        "            print(livro)\n",
+        "            encontrado = True\n",
+        "            break\n",
+        "\n",
+        "    if not encontrado:\n",
+        "        print(\"Livro não encontrado.\")\n",
+        "\n",
+        "\n",
+        "def gerar_grafico(livros):\n",
+        "    if len(livros) == 0:\n",
+        "        print(\"Não há livros cadastrados para gerar o gráfico.\")\n",
+        "        return\n",
+        "\n",
+        "    generos = {}\n",
+        "\n",
+        "    for livro in livros:\n",
+        "        if livro.genero in generos:\n",
+        "            generos[livro.genero] += livro.quantidade_disponivel\n",
+        "        else:\n",
+        "            generos[livro.genero] = livro.quantidade_disponivel\n",
+        "\n",
+        "    plt.bar(generos.keys(), generos.values())\n",
+        "\n",
+        "    plt.title(\"Quantidade de livros por gênero\")\n",
+        "    plt.xlabel(\"Gênero\")\n",
+        "    plt.ylabel(\"Quantidade\")\n",
+        "\n",
+        "    plt.show()\n",
+        "\n",
+        "\n",
+        "def menu():\n",
+        "    livros = []\n",
+        "\n",
+        "    while True:\n",
+        "        print(\"\\n===== BIBLIOTECA =====\")\n",
+        "        print(\"1 - Cadastrar livro\")\n",
+        "        print(\"2 - Listar livros\")\n",
+        "        print(\"3 - Buscar livro\")\n",
+        "        print(\"4 - Gerar gráfico\")\n",
+        "        print(\"5 - Sair\")\n",
+        "\n",
+        "        opcao = input(\"Escolha uma opção: \")\n",
+        "\n",
+        "        if opcao == \"1\":\n",
+        "            cadastrar_livro(livros)\n",
+        "\n",
+        "        elif opcao == \"2\":\n",
+        "            listar_livros(livros)\n",
+        "\n",
+        "        elif opcao == \"3\":\n",
+        "            buscar_livro(livros)\n",
+        "\n",
+        "        elif opcao == \"4\":\n",
+        "            gerar_grafico(livros)\n",
+        "\n",
+        "        elif opcao == \"5\":\n",
+        "            print(\"Programa encerrado.\")\n",
+        "            break\n",
+        "\n",
+        "        else:\n",
+        "            print(\"Opção inválida.\")\n",
+        "\n",
+        "\n",
+        "menu()"
+      ]
+    }
+  ]
+}
